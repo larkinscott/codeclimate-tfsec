@@ -1,0 +1,13 @@
+{
+  "name": "codeclimate-tfsec",
+  "description": "A security linter for Terraform files.",
+  "maintainer": {
+    "name": "Code Climate",
+    "email": "hello@codeclimate.com"
+  },
+  "languages": [
+    "Ruby"
+  ],
+  "version": "1.0.0",
+  "spec_version": "0.3.1"
+}
