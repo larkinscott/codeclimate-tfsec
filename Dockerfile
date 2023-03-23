@@ -9,7 +9,7 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 # Copy the Ruby script into the container
-COPY codeclimate-tfsec.rb /usr/src/app/
+COPY lib/cc/plugin/codeclimate_tfsec.rb /usr/src/app/
 
 # Install tfsec from GitHub
 RUN apt-get update && \
@@ -32,4 +32,4 @@ WORKDIR /code
 VOLUME /code
 
 # Run the Ruby script when the container launches
-CMD ["ruby", "/usr/src/app/codeclimate-tfsec.rb"]
+CMD ["ruby", "/usr/src/app/codeclimate_tfsec.rb"]

@@ -1,4 +1,4 @@
-.PHONY: image citest test
+.PHONY: image
 
 IMAGE_NAME ?= codeclimate/codeclimate-tfsec
 
