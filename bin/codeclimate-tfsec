@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+STDERR.sync = true
+STDOUT.sync = true
+
+$:.unshift(File.expand_path("../lib", File.dirname(__FILE__)))
+
+require "cc/plugin/tfsec"
+
+tfsec = CC::Plugin::TFSec.new
+tfsec.process_results
