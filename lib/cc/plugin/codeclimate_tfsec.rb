@@ -8,7 +8,7 @@ class CodeClimateTFSec
   def initialize
     @config_file = ".codeclimate.yml"
     @config = read_config
-    @exclude_patterns = @config.fetch("exclude_patterns", nil)
+    @exclude_patterns = @config.dig("plugins", "tfsec", "exclude_paths")
     @remediation_points = 50000
   end
 
@@ -19,12 +19,11 @@ class CodeClimateTFSec
   end
 
   def exclude_flags
-    # this might not work as expected; ignoring for now
     @exclude_patterns.map { |pattern| "--exclude-path=#{pattern}" } unless @exclude_patterns.nil?
   end
 
   def run_tfsec
-    stdout, stderr, status = Open3.capture3("tfsec", ".", "-f", "json", *exclude_flags)
+    stdout, stderr, status = Open3.capture3("tfsec", "--force-all-dirs", "-f", "json", *exclude_flags)
 
     JSON.parse(stdout).fetch("results")
   end
@@ -32,7 +31,7 @@ class CodeClimateTFSec
   def generate_issues(result)
     {
         type: "issue",
-        check_name: "tfsec/#{result.fetch("rule_id")}",
+        check_name: result.fetch("long_id"),
         description: result.fetch("description"),
         categories: ["Security"],
         location: {
