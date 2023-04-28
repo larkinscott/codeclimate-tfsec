@@ -44,6 +44,7 @@ module CC
             severity: "info",
             remediation_points: @remediation_points,
             fingerprint: result.fetch("rule_id"),
+            content: { body: render_content(result) },
           }
       end
 
@@ -54,6 +55,25 @@ module CC
           puts issue.to_json
           puts "\0"
         end
+      end
+
+      private
+
+      def render_content(result)
+        rule_description = result.fetch("rule_description")
+        resolution = result.fetch("resolution")
+        impact = result.fetch("impact")
+
+        readup = <<~END
+          ## Rule description ##
+          #{rule_description}
+
+          ## Resolution ##
+          #{resolution}
+
+          ## Impact ##
+          #{impact}
+        END
       end
     end
   end
