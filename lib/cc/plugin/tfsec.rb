@@ -60,11 +60,11 @@ module CC
       private
 
       def render_content(result)
-        rule_description = result.fetch("rule_description")
-        resolution = result.fetch("resolution")
         impact = result.fetch("impact")
+        resolution = result.fetch("resolution")
+        rule_description = result.fetch("rule_description")
 
-        readup = <<~END
+        <<~END
           ## Rule description ##
           #{rule_description}
 
