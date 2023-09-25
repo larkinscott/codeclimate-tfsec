@@ -10,6 +10,7 @@
   plugins:
     tfsec:
       enabled: true
+      channel: beta
   ```
 3. Run `codeclimate engines:install`
 4. You're ready to analyze! Browse into your project's folder and run `codeclimate analyze`.
